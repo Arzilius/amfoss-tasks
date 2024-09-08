@@ -1,0 +1,15 @@
+* /start- Hello! Welcome to Pagepal! Feeling confused on what to read? Well don't worry, I'll be here to suggest you books based on what YOU feel like reading. Type in /book to find a suitable book
+
+* /book- I see you're looking for a book to read. Enter a genre:
+(Returns a csv file with different book names and their details with different columns for each detail)
+Gets the list from an external source like an external API
+Details- Name of book, Author, Description, Year of publication, language and preview if there is one (If api has it I'll try to get a rating for it too)
+
+* /preview- Ask for the name of the book (Case sensitive) and it pulls up the preview link
+
+* /list- this command itself doesn't do anything but it makes us do another command after you type in a specific book name
+/reading_list- Three buttons, Add a book, delete a book and view reading list. Reading list should contain title of book, preview link along with some message telling you to complete reading the books in your list
+
+* /help- basically is this file but more user friendly
+
+
