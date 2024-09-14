@@ -3,6 +3,8 @@ from telegram import Update
 from telegram.ext import Application, CommandHandler, MessageHandler, filters, ContextTypes, ConversationHandler
 
 TOKEN: Final= 'v7276859865:AAEhxOuZ81Vq1t6RA5M3RyGicclmJajIuvY'
+GOOGLE_BOOKS_API_KEY: Final = 'AIzaSyAz419yysq-qmYmFz5jRWDdEUIK8KpMtDk'
+GOOGLE_BOOKS_API_URL: Final = 'https://www.googleapis.com/books/v1/volumes'
 BOT_USERNAME: Final = '@pagepal90210bot'
 
 BOOK_NAME = 1
@@ -18,7 +20,7 @@ async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
 #book
 async def book_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text("I see you're looking for a book to read. Please enter a genre:")
-    return BOOK_NAME  # Proceed to the next step where the bot expects the genre input
+    return BOOK_NAME  
 
 #preview
 async def preview_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -27,18 +29,22 @@ async def preview_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
 #list
 async def list_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text("Please type in the name of your book:")
-    return BOOK_NAME  # Wait for the user to input the book name
+    return BOOK_NAME 
 
-# Handling book name
+#book name
 async def receive_book_name(update: Update, context: ContextTypes.DEFAULT_TYPE):
     book_name = update.message.text
     
-    # Storing the book name in the context for future use (optional)
     context.user_data['book_name'] = book_name
     
     await update.message.reply_text(f"You've entered: {book_name}")
     await update.message.reply_text("Now do /reading_list to proceed further.")
-    return ConversationHandler.END  # End the conversation at this point
+    return ConversationHandler.END  
+    
+async def cancel_command(update: Update, contet: ContextTypes.DEFAULT_TYPE):
+
+    
+    
 
 def handle_response(text: str) -> str:
     processed: str = text.lower()
@@ -70,7 +76,8 @@ def main():
         states={
             BOOK_NAME: [MessageHandler(filters.TEXT & ~filters.COMMAND, receive_book_name)],
         },
-        fallbacks=[],
+        fallbacks=[cancel],
+       
     )
     
     app.add_handler(conv_handler)

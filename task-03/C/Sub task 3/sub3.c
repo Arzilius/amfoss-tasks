@@ -9,7 +9,6 @@ void print_diamond(int n) {
 
     int mid = n / 2;
 
-    // Upper part of the diamond
     for (int i = 1; i <= n; i += 2) {
         int spaces = mid - i / 2;
         for (int j = 0; j < spaces; ++j) {
@@ -21,7 +20,6 @@ void print_diamond(int n) {
         printf("\n");
     }
 
-    // Lower part of the diamond
     if (n % 2 == 0) {
         for (int i = n - 1; i >= 1; i -= 2) {
             int spaces = mid - i / 2 + 1;
