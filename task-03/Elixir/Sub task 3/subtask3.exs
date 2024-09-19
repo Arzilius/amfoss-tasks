@@ -33,5 +33,3 @@ end
 IO.write("Enter the number of rows for the diamond: ")
 n = IO.gets("") |> String.trim() |> String.to_integer()
 Diamond.print_diamond(n)
-
-
