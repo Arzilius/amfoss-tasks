@@ -1,59 +1,37 @@
-package main
+defmodule Diamond do
+  def print_diamond(n) when n < 1 do
+    IO.puts("Number should be greater than 1")
+  end
 
-import (
-	"fmt"
-)
+  def print_diamond(n) do
+    mid = div(n, 2)
 
-func printDiamond(n int) {
-	if n < 1 {
-		fmt.Println("Number should be greater than 1")
-		return
-	}
+    # Upper part of the diamond
+    for i <- 1..n//2 + 1, rem(2 * i - 1, 2) == 1 do
+      spaces = mid - i + 1
+      stars = 2 * i - 1
+      IO.puts String.duplicate(" ", spaces) <> String.duplicate("*", stars)
+    end
 
-	// Calculate the middle point
-	mid := n / 2
+    # Lower part of the diamond
+    if rem(n, 2) == 0 do
+      for i <- n//2..1, rem(2 * i - 1, 2) == 1 do
+        spaces = mid - i + 1
+        stars = 2 * i - 1
+        IO.puts String.duplicate(" ", spaces) <> String.duplicate("*", stars)
+      end
+    else
+      for i <- n//2..1, rem(2 * i - 1, 2) == 1 do
+        spaces = mid - i + 1
+        stars = 2 * i - 1
+        IO.puts String.duplicate(" ", spaces) <> String.duplicate("*", stars)
+      end
+    end
+  end
+end
 
-	// Upper part of the diamond
-	for i := 1; i <= n; i += 2 {
-		// Calculate and print leading spaces
-		spaces := mid - i/2
-		fmt.Print(fmt.Sprintf("%*s", spaces+1, ""))
+IO.write("Enter the number of rows for the diamond: ")
+n = IO.gets("") |> String.trim() |> String.to_integer()
+Diamond.print_diamond(n)
 
-		// Print stars
-		fmt.Println(fmt.Sprintf("%*s", i, ""))
-	}
-
-	// Lower part of the diamond
-	if n%2 == 0 {
-		for i := n - 1; i >= 1; i -= 2 {
-			// Calculate and print leading spaces
-			spaces := mid - i/2 + 1 // Slightly adjust spaces for asymmetry
-			fmt.Print(fmt.Sprintf("%*s", spaces+1, ""))
-
-			// Print stars
-			fmt.Println(fmt.Sprintf("%*s", i, ""))
-		}
-	} else {
-		for i := n - 2; i >= 1; i -= 2 {
-			// Calculate and print leading spaces
-			spaces := mid - i/2
-			fmt.Print(fmt.Sprintf("%*s", spaces+1, ""))
-
-			// Print stars
-			fmt.Println(fmt.Sprintf("%*s", i, ""))
-		}
-	}
-}
-
-func main() {
-	var n int
-	fmt.Print("Enter the number of rows for the diamond: ")
-	_, err := fmt.Scan(&n)
-	if err != nil {
-		fmt.Println("Invalid input")
-		return
-	}
-
-	printDiamond(n)
-}
 
